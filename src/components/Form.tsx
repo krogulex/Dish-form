@@ -16,6 +16,8 @@ import {
 
 import axios from "axios";
 
+import { nanoid } from "nanoid";
+
 export interface FormProps {}
 
 axios.defaults.baseURL =
@@ -33,15 +35,70 @@ const Form: React.FC = () => {
       slices_of_bread: "",
     },
     onSubmit: (values, { resetForm }) => {
-      console.log(values);
+      let dish = {}
+      if (values.type === "pizza") {
+        dish = {
+          name: values.name,
+          preparation_time: values.preparation_time,
+          type: values.type,
+          no_of_slices: values.no_of_slices,
+          diameter: values.diameter,
+          id: nanoid(),
+        }
+        console.log(dish);
         axios
-        .post("dishes/", { values })
+        .post("dishes/",  dish )
         .then(function (response) {
           console.log(response);
         })
         .catch(function (error) {
           console.log(error);
         });
+      }
+      if (values.type === "soup") {
+        dish = {
+          name: values.name,
+          preparation_time: values.preparation_time,
+          type: values.type,
+          spiciness_scale: values.spiciness_scale,
+          id: nanoid(),
+        }
+        console.log(dish);
+        axios
+        .post("dishes/",  dish )
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+      if (values.type === "pizza") {
+        dish = {
+          name: values.name,
+          preparation_time: values.preparation_time,
+          type: values.type,
+          slices_of_bread: values.slices_of_bread,
+          id: nanoid(),
+        }
+        console.log(dish);
+        axios
+        .post("dishes/",  dish )
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+/*         axios
+        .post("dishes/", { values })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        }); */
 
       resetForm();
     },
@@ -51,7 +108,6 @@ const Form: React.FC = () => {
       type: Yup.string().required("Dish type is required!"),
       no_of_slices: Yup.number().when("type", (type, schema) => {
         if (String(type) === "pizza") {
-          console.log(schema)
           return schema 
           .required("Number of slices is required!")
           .min(1, "Number must be greater than 0");
@@ -60,7 +116,6 @@ const Form: React.FC = () => {
       }),
       diameter: Yup.number().when("type", (type, schema) => {
         if (String(type) === "pizza") {
-          console.log(schema)
           return schema
           .required("Diameter is required!")
           .min(0, "Number must be greater than 0");
@@ -75,7 +130,6 @@ const Form: React.FC = () => {
       }),
       slices_of_bread: Yup.number().when("type", (type, schema) => {
         if (String(type) === "sandwich") {
-          console.log(schema)
           return schema 
           .required("Number of slices is required!")
           .min(1, "Number must be greater than 0")
