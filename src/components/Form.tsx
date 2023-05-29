@@ -34,14 +34,14 @@ const Form: React.FC = () => {
     },
     onSubmit: (values, { resetForm }) => {
       console.log(values);
-/*       axios
+       axios
         .post("dishes/", { values })
         .then(function (response) {
           console.log(response);
         })
         .catch(function (error) {
           console.log(error);
-        }); */
+        }); 
 
       resetForm();
     },
