@@ -34,14 +34,14 @@ const Form: React.FC = () => {
     },
     onSubmit: (values, { resetForm }) => {
       console.log(values);
-       axios
+/*        axios
         .post("dishes/", { values })
         .then(function (response) {
           console.log(response);
         })
         .catch(function (error) {
           console.log(error);
-        }); 
+        });  */
 
       resetForm();
     },
@@ -68,16 +68,17 @@ const Form: React.FC = () => {
         return schema.notRequired()
       }),
       spiciness_scale: Yup.number().when("type", (type, schema) => {
-        if (String(type) === "pizza") {
+        if (String(type) === "soup") {
           return schema.required("Spiciness scale is required!")
         }
         return schema.notRequired()
       }),
       slices_of_bread: Yup.number().when("type", (type, schema) => {
         if (String(type) === "sandwich") {
+          console.log(schema)
           return schema 
           .required("Number of slices is required!")
-          .min(1, "Number must be greater than 0");
+          .min(1, "Number must be greater than 0")
         }
         return schema.notRequired()
       }),
@@ -219,9 +220,9 @@ const Form: React.FC = () => {
               sx={{ m: 2, margin: "0px" }}
             />
             <div className={css.error}>
-              {formik.errors.spiciness_scale &&
-                formik.touched.spiciness_scale &&
-                formik.errors.spiciness_scale}
+              {formik.errors.slices_of_bread &&
+                formik.touched.slices_of_bread &&
+                formik.errors.slices_of_bread}
             </div>
           </div>
         )}
