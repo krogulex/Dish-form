@@ -1,3 +1,6 @@
+h1 {
+    text-align: center;
+}
 .content {
     max-width: 450px;
     margin-left: auto;
@@ -26,4 +29,14 @@
 }
 .error {
     color: red;
+    text-align: center;
+}
+.errorSoup {
+    margin-top: 15px;
+}
+.errorSandwich {
+    margin-top: 15px;
+}
+.errorPizza {
+    margin-bottom: 15px;
 }

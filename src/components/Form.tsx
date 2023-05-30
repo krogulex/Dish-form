@@ -16,7 +16,11 @@ import {
 
 import axios from "axios";
 
-import { nanoid } from "nanoid";
+import { customAlphabet } from "nanoid";
+
+const alphabet = '0123456789';
+const nanoid = customAlphabet(alphabet, 20);
+console.log(nanoid())
 
 export interface FormProps {}
 
@@ -34,7 +38,7 @@ const Form: React.FC = () => {
       spiciness_scale: "",
       slices_of_bread: "",
     },
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: async (values, { resetForm }) => {
       let dish = {}
       if (values.type === "pizza") {
         dish = {
@@ -45,15 +49,6 @@ const Form: React.FC = () => {
           diameter: values.diameter,
           id: nanoid(),
         }
-        console.log(dish);
-        axios
-        .post("dishes/",  dish )
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
       }
       if (values.type === "soup") {
         dish = {
@@ -63,17 +58,8 @@ const Form: React.FC = () => {
           spiciness_scale: values.spiciness_scale,
           id: nanoid(),
         }
-        console.log(dish);
-        axios
-        .post("dishes/",  dish )
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
       }
-      if (values.type === "pizza") {
+      if (values.type === "sandwich") {
         dish = {
           name: values.name,
           preparation_time: values.preparation_time,
@@ -81,16 +67,24 @@ const Form: React.FC = () => {
           slices_of_bread: values.slices_of_bread,
           id: nanoid(),
         }
-        console.log(dish);
-        axios
-        .post("dishes/",  dish )
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
       }
+      console.log(dish)
+
+      try {
+        const res = await axios.post("dishes/", dish)
+        console.log(res)
+      } catch (error) {
+        console.log(error);
+      }
+
+/*       axios
+      .post("dishes/",  dish )
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      }); */
 /*         axios
         .post("dishes/", { values })
         .then(function (response) {
@@ -207,7 +201,7 @@ const Form: React.FC = () => {
               className={css.pizzaInput}
               sx={{ m: 2, marginLeft: "0px" }}
             />
-            <div className={css.error}>
+            <div className={`${css.error} ${css.errorPizza}`}>
               {formik.errors.no_of_slices &&
                 formik.touched.no_of_slices &&
                 formik.errors.no_of_slices}
@@ -224,7 +218,7 @@ const Form: React.FC = () => {
               className={css.pizzaInput}
               sx={{ m: 2, marginLeft: "0px" }}
             />
-            <div className={css.error}>
+            <div className={`${css.error} ${css.errorPizza}`}>
               {formik.errors.diameter &&
                 formik.touched.diameter &&
                 formik.errors.diameter}
@@ -251,7 +245,7 @@ const Form: React.FC = () => {
               <MenuItem value="9">9</MenuItem>
               <MenuItem value="10">10</MenuItem>
             </Select>
-            <div className={css.error}>
+            <div className={`${css.error} ${css.errorSoup}`}>
               {formik.errors.spiciness_scale &&
                 formik.touched.spiciness_scale &&
                 formik.errors.spiciness_scale}
@@ -270,10 +264,9 @@ const Form: React.FC = () => {
               inputProps={{
                 step: "1",
               }}
-              className={css.inputField}
-              sx={{ m: 2, margin: "0px" }}
+              sx={{ m: 2, margin: "0px", width: "100%" }}
             />
-            <div className={css.error}>
+            <div className={`${css.error} ${css.errorSandwich}`}>
               {formik.errors.slices_of_bread &&
                 formik.touched.slices_of_bread &&
                 formik.errors.slices_of_bread}
