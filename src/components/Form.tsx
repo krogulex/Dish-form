@@ -20,9 +20,6 @@ import { customAlphabet } from "nanoid";
 
 const alphabet = '0123456789';
 const nanoid = customAlphabet(alphabet, 20);
-console.log(nanoid())
-
-export interface FormProps {}
 
 axios.defaults.baseURL =
   "https://umzzcc503l.execute-api.us-west-2.amazonaws.com/";
