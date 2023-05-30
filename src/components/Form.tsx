@@ -68,7 +68,6 @@ const Form: React.FC = () => {
           id: nanoid(),
         }
       }
-      console.log(dish)
 
       try {
         const res = await axios.post("dishes/", dish)
@@ -76,24 +75,6 @@ const Form: React.FC = () => {
       } catch (error) {
         console.log(error);
       }
-
-/*       axios
-      .post("dishes/",  dish )
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      }); */
-/*         axios
-        .post("dishes/", { values })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        }); */
-
       resetForm();
     },
      validationSchema: Yup.object({
