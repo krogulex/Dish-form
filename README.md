@@ -2,11 +2,12 @@
 
 The form allows you to send data to the API
 
-Form was made with Formik, Yup, and MUI.
+Form was made with Formik, Yup, and MUI. To post data to API I used axios.
 
 
 ## The following libraries must be installed in order to set up the project:
 Installed libraries with versions
+
 ├── @emotion/react@11.11.0
 
 ├── @emotion/styled@11.11.0
@@ -24,16 +25,27 @@ Installed libraries with versions
 ├── @types/node@16.18.32
 
 ├── @types/react-datepicker@4.11.2
+
 ├── @types/react-dom@18.2.4
+
 ├── @types/react@18.2.7
+
 ├── axios@1.4.0
+
 ├── formik@2.2.9
+
 ├── gh-pages@5.0.0
+
 ├── nanoid@4.0.2
-├── react-datepicker@4.12.0
+
 ├── react-dom@18.2.0
+
 ├── react-scripts@5.0.1
+
 ├── react@18.2.0
+
 ├── typescript@4.9.5
+
 ├── web-vitals@2.1.4
+
 └── yup@1.2.0
